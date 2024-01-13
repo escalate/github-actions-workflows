@@ -23,6 +23,11 @@ jobs:
         run: |
           npm install -g @commitlint/cli @commitlint/config-conventional
 
+      - name: Configure commitlint
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+
       - name: Run commitlint
         if: github.event_name == 'pull_request'
         run: |
