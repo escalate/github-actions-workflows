@@ -33,7 +33,11 @@ jobs:
         run: |
           npm install -g semantic-release conventional-changelog-conventionalcommits
 
-      - name: Create Github release
+      - name: Configure semantic-release
+        run: |
+          echo "{"preset":"conventionalcommits","plugins":["@semantic-release/commit-analyzer","@semantic-release/release-notes-generator","@semantic-release/github"]}" > .releaserc.json
+
+      - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
