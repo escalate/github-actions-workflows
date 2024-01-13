@@ -22,7 +22,7 @@ jobs:
 
       - name: Configure semantic-release
         run: |
-          echo "{"preset":"conventionalcommits","plugins":["@semantic-release/commit-analyzer","@semantic-release/release-notes-generator","@semantic-release/github"]}" > .releaserc.json
+          echo '{"preset":"conventionalcommits","plugins":["@semantic-release/commit-analyzer","@semantic-release/release-notes-generator","@semantic-release/github"]}' > .releaserc.json
 
       - name: Run semantic-release
         env:
