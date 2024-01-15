@@ -1,6 +1,9 @@
 name: Release
 'on':
   workflow_call:
+    secrets:
+      ANSIBLE_GALAXY_API_TOKEN:
+        required: true
 jobs:
   release:
     name: Release
