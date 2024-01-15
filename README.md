@@ -1,2 +1,7 @@
-# github-actions-workflows
+# GitHub Actions Workflows
+
 GitHub Actions Workflows
+
+## License
+
+MIT
