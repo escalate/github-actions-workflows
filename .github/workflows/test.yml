@@ -94,7 +94,7 @@ jobs:
 
       - name: Check for Dockerfile files
         id: check_dockerfile
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "**/Dockerfile*"
 
@@ -122,7 +122,7 @@ jobs:
 
       - name: Check for Shell files
         id: check_shell
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "**/*.sh"
 
@@ -151,7 +151,7 @@ jobs:
 
       - name: Check for YAML files
         id: check_yaml
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "**/*.yml"
 
@@ -180,7 +180,7 @@ jobs:
 
       - name: Check for Python files
         id: check_python
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "**/*.py"
 
@@ -212,7 +212,7 @@ jobs:
 
       - name: Check for Tox file
         id: check_tox
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "tox.ini"
 
@@ -240,7 +240,7 @@ jobs:
 
       - name: Check for Ansible files
         id: check_ansible
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "tasks, meta"
 
@@ -267,7 +267,7 @@ jobs:
 
       - name: Check for Molecule files
         id: check_molecule
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "molecule"
 
@@ -290,7 +290,7 @@ jobs:
 
       - name: Check for Docker-Compose test file
         id: check_docker_compose_test
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "docker-compose.test.yml"
 
@@ -308,7 +308,7 @@ jobs:
 
       - name: Check for Go files
         id: check_go
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: "**/*.go"
 
