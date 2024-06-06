@@ -235,11 +235,6 @@ jobs:
     name: Ansible
     runs-on: ubuntu-latest
     steps:
-      - name: Free disk space
-        uses: jlumbroso/free-disk-space@main
-        with:
-          tool-cache: false
-
       - name: Check out repository
         uses: actions/checkout@v4
 
@@ -276,8 +271,14 @@ jobs:
         with:
           files: "molecule"
 
-      - name: Install molecule
+      - name: Free disk space
         if: steps.check_molecule.outputs.files_exists == 'true'
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+
+      - name: Install molecule
+
         run: |
           pip3 install --disable-pip-version-check molecule molecule-plugins[docker] pytest-testinfra
 
