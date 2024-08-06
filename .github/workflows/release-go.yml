@@ -24,6 +24,10 @@ jobs:
         with:
           install-only: true
 
+      - name: Check GoReleaser configuration
+        run: |
+          goreleaser check
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
