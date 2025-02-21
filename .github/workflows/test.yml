@@ -285,6 +285,16 @@ jobs:
         run: |
           isort . --check-only --diff --color
 
+      - name: Install black
+        if: steps.check_python.outputs.files_exists == 'true'
+        run: |
+          pip3 install --disable-pip-version-check black
+
+      - name: Run black
+        if: steps.check_python.outputs.files_exists == 'true'
+        run: |
+          black . --check --diff --color
+
       - name: Check for Tox file
         id: check_tox
         uses: andstor/file-existence-action@v3
