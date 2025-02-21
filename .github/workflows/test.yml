@@ -195,6 +195,22 @@ jobs:
         run: |
           find . -name "*.sh" -not -path "*/ansible_collections/*" -print0 | xargs -0 -I{} shellcheck --external-sources "{}"
 
+      - name: Install shfmt
+        if: steps.check_shell.outputs.files_exists == 'true'
+        env:
+          GH_REPO: mvdan/sh
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          gh release download --pattern "*_linux_amd64" --dir /tmp
+          mv shfmt_*_linux_amd64 shfmt
+          chmod +x /tmp/shfmt
+          mv /tmp/shfmt /usr/local/bin/shfmt
+
+      - name: Run staticcheck
+        if: steps.check_shell.outputs.files_exists == 'true'
+        run: |
+          shfmt --indent 2 --case-indent --diff .
+
   yaml:
     name: YAML
     runs-on: ubuntu-latest
