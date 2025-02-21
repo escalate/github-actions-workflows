@@ -149,25 +149,31 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Check for YAML files
-        id: check_yaml
+      - name: Check for YML files
+        id: check_yml
         uses: andstor/file-existence-action@v3
         with:
           files: "**/*.yml"
 
+      - name: Check for YAML files
+        id: check_yaml
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "**/*.yaml"
+
       - name: Set up Python 3.x
-        if: steps.check_yaml.outputs.files_exists == 'true'
+        if: steps.check_yml.outputs.files_exists == 'true' || steps.check_yaml.outputs.files_exists == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
       - name: Install yamllint
-        if: steps.check_yaml.outputs.files_exists == 'true'
+        if: steps.check_yml.outputs.files_exists == 'true' || steps.check_yaml.outputs.files_exists == 'true'
         run: |
           pip3 install --disable-pip-version-check yamllint
 
       - name: Run yamllint
-        if: steps.check_yaml.outputs.files_exists == 'true'
+        if: steps.check_yml.outputs.files_exists == 'true' || steps.check_yaml.outputs.files_exists == 'true'
         run: |
           yamllint --strict .
 
