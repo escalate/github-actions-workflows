@@ -206,7 +206,7 @@ jobs:
           chmod +x /tmp/shfmt
           mv /tmp/shfmt /usr/local/bin/shfmt
 
-      - name: Run staticcheck
+      - name: Run shfmt
         if: steps.check_shell.outputs.files_exists == 'true'
         run: |
           shfmt --indent 2 --case-indent --diff .
