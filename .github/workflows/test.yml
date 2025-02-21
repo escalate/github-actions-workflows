@@ -152,7 +152,7 @@ jobs:
 
       - name: Set up NodeJS LTS
         if: steps.check_css.outputs.files_exists == 'true' || steps.check_html.outputs.files_exists == 'true' || steps.check_js.outputs.files_exists == 'true' || steps.check_json.outputs.files_exists == 'true' || steps.check_md.outputs.files_exists == 'true'
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
 
