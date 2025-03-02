@@ -374,7 +374,7 @@ jobs:
           tool-cache: false
 
       - name: Install molecule
-
+        if: steps.check_molecule.outputs.files_exists == 'true'
         run: |
           pip3 install --disable-pip-version-check molecule molecule-plugins[docker] pytest-testinfra
 
