@@ -207,7 +207,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           gh release download --pattern "*_linux_amd64" --dir /tmp
-          mv shfmt_*_linux_amd64 shfmt
+          mv /tmp/shfmt_*_linux_amd64 /tmp/shfmt
           chmod +x /tmp/shfmt
           mv /tmp/shfmt /usr/local/bin/shfmt
 
