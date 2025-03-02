@@ -165,8 +165,6 @@ jobs:
         if: steps.check_css.outputs.files_exists == 'true' || steps.check_html.outputs.files_exists == 'true' || steps.check_js.outputs.files_exists == 'true' || steps.check_json.outputs.files_exists == 'true' || steps.check_md.outputs.files_exists == 'true'
         run: |
           echo -e '*.yml\n*.yaml' >> .prettierignore
-          cat .prettierignore
-          ls -alih
 
       - name: Run prettier
         if: steps.check_css.outputs.files_exists == 'true' || steps.check_html.outputs.files_exists == 'true' || steps.check_js.outputs.files_exists == 'true' || steps.check_json.outputs.files_exists == 'true' || steps.check_md.outputs.files_exists == 'true'
