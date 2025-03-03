@@ -83,7 +83,7 @@ jobs:
 
       - name: Run editorconfig-checker
         run: |
-          ec
+          ec -verbose
 
   dockerfile:
     name: Dockerfile
