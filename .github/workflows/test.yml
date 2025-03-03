@@ -253,7 +253,7 @@ jobs:
           files: ".yamllint"
 
       - name: Configure yamllint
-        if: steps.check_yamllint.outputs.files_exists == 'true'
+        if: steps.check_yamllint.outputs.files_exists == 'false'
         run: |
           touch ".gitignore"
           touch ".yamlignore"
