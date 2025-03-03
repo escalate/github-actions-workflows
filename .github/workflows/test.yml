@@ -246,8 +246,14 @@ jobs:
         run: |
           pip3 install --disable-pip-version-check yamllint
 
+      - name: Check for yamllint configuration
+        id: check_yamllint
+        uses: andstor/file-existence-action@v3
+        with:
+          files: ".yamllint"
+
       - name: Configure yamllint
-        if: steps.check_yml.outputs.files_exists == 'true' || steps.check_yaml.outputs.files_exists == 'true'
+        if: steps.check_yamllint.outputs.files_exists == 'true'
         run: |
           touch ".gitignore"
           touch ".yamlignore"
