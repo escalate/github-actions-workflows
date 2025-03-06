@@ -350,6 +350,8 @@ jobs:
       - name: Run ansible-lint
         if: steps.check_ansible.outputs.files_exists == 'true'
         run: |
+          touch ".gitignore"
+          touch ".yamlignore"
           ansible-lint --strict --force-color .
 
       - name: Check for Molecule files
