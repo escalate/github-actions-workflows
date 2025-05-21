@@ -325,34 +325,49 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Check for Ansible files
-        id: check_ansible
+      - name: Check for Ansible role files
+        id: check_ansible_role
         uses: andstor/file-existence-action@v3
         with:
           files: "tasks, meta"
 
+      - name: Check for Ansible playbook files
+        id: check_ansible_playbook
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "site.yml"
+
       - name: Set up Python 3.x
-        if: steps.check_ansible.outputs.files_exists == 'true'
+        if: steps.check_ansible_role.outputs.files_exists == 'true' || steps.check_ansible_playbook.outputs.files_exists == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
       - name: Install ansible
-        if: steps.check_ansible.outputs.files_exists == 'true'
+        if: steps.check_ansible_role.outputs.files_exists == 'true' || steps.check_ansible_playbook.outputs.files_exists == 'true'
         run: |
           pip3 install --disable-pip-version-check ansible
 
       - name: Install ansible-lint
-        if: steps.check_ansible.outputs.files_exists == 'true'
+        if: steps.check_ansible_role.outputs.files_exists == 'true' || steps.check_ansible_playbook.outputs.files_exists == 'true'
         run: |
           pip3 install --disable-pip-version-check ansible-lint
 
-      - name: Run ansible-lint
-        if: steps.check_ansible.outputs.files_exists == 'true'
+      - name: Fix yamllint configuration
+        if: steps.check_ansible_role.outputs.files_exists == 'true' || steps.check_ansible_playbook.outputs.files_exists == 'true'
         run: |
           touch ".gitignore"
           touch ".yamlignore"
+
+      - name: Run ansible-lint for Ansible role
+        if: steps.check_ansible_role.outputs.files_exists == 'true'
+        run: |
           ansible-lint --strict --force-color .
+
+      - name: Run ansible-lint for Ansible playbook
+        if: steps.check_ansible_playbook.outputs.files_exists == 'true'
+        run: |
+          find . -maxdepth 1 -name "*.yml" -not -name "requirements.yml" | xargs -n1 ansible-lint --strict --force-color
 
       - name: Check for Molecule files
         id: check_molecule
