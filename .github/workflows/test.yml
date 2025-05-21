@@ -367,7 +367,12 @@ jobs:
       - name: Run ansible-lint for Ansible playbook
         if: steps.check_ansible_playbook.outputs.files_exists == 'true'
         run: |
-          find . -maxdepth 1 -name "*.yml" -not -name "requirements.yml" | xargs -n1 ansible-lint --strict --force-color
+          find . -maxdepth 1 -name "*.yml" -not -name "requirements.yml" -not -name "hosts.yml" | xargs -n1 ansible-lint --strict --force-color
+
+      - name: Run ansible-playbook syntax-check for Ansible playbook
+        if: steps.check_ansible_playbook.outputs.files_exists == 'true'
+        run: |
+          find . -maxdepth 1 -name "*.yml" -not -name "requirements.yml" -not -name "hosts.yml" | xargs -n1 ansible-playbook --inventory="hosts.yml" --syntax-check
 
       - name: Check for Molecule files
         id: check_molecule
