@@ -57,7 +57,7 @@ jobs:
       - name: Install gitleaks
         env:
           GH_REPO: gitleaks/gitleaks
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download --pattern "*linux_x64.tar.gz" --dir /tmp
           tar --extract --gzip --file /tmp/*linux_x64.tar.gz --directory /tmp
@@ -78,7 +78,7 @@ jobs:
       - name: Install editorconfig-checker
         env:
           GH_REPO: editorconfig-checker/editorconfig-checker
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download --pattern "*linux-amd64.tar.gz" --dir /tmp
           tar --extract --gzip --strip-components 1 --file /tmp/ec-linux-amd64.tar.gz --directory /tmp
@@ -106,7 +106,7 @@ jobs:
         if: steps.check_dockerfile.outputs.files_exists == 'true'
         env:
           GH_REPO: hadolint/hadolint
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download --pattern "*Linux-x86_64" --dir /tmp
           chmod +x /tmp/hadolint-Linux-x86_64
@@ -187,7 +187,7 @@ jobs:
         if: steps.check_shell.outputs.files_exists == 'true'
         env:
           GH_REPO: koalaman/shellcheck
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download --pattern "*linux.x86_64.tar.xz" --dir /tmp
           tar --extract --xz --strip-components 1 --file /tmp/shellcheck-*.linux.x86_64.tar.xz --directory /tmp
@@ -203,7 +203,7 @@ jobs:
         if: steps.check_shell.outputs.files_exists == 'true'
         env:
           GH_REPO: mvdan/sh
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download --pattern "*_linux_amd64" --dir /tmp
           mv /tmp/shfmt_*_linux_amd64 /tmp/shfmt
@@ -453,7 +453,7 @@ jobs:
         if: steps.check_go.outputs.files_exists == 'true'
         env:
           GH_REPO: dominikh/go-tools
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download --pattern "*linux_amd64.tar.gz" --dir /tmp
           tar --extract --gzip --strip-components 1 --file /tmp/staticcheck_linux_amd64.tar.gz --directory /tmp
