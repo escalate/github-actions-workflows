@@ -5,6 +5,10 @@ name: Test
       - master
   pull_request:
   workflow_call:
+    secrets:
+      VAULT_PASS:
+        description: 'Password for Ansible Vault'
+        required: false
 jobs:
   commits:
     name: Commits
