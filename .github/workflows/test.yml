@@ -378,6 +378,7 @@ jobs:
         env:
           VAULT_PASS: ${{ secrets.VAULT_PASS }}
         run: |
+          echo "${VAULT_PASS}"
           find . -maxdepth 1 -name "*.yml" -not -name "requirements.yml" -not -name "hosts.yml" | xargs -n1 ansible-playbook --inventory="hosts.yml" --syntax-check
 
       - name: Check for Molecule files
