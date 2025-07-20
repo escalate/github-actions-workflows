@@ -36,6 +36,10 @@ jobs:
         run: |
           echo '{"preset":"conventionalcommits","plugins":[["@semantic-release/commit-analyzer"],["@semantic-release/release-notes-generator"],["@semantic-release/github"],["@semantic-release/exec",{"publishCmd":"sed -i s/NEXT_VERSION/${nextRelease.version}/ galaxy.yml && ansible-galaxy collection build && ansible-galaxy collection publish --api-key ${{ secrets.ANSIBLE_GALAXY_API_TOKEN }} $(echo ${{ github.repository }} | cut -d/ -f1)-$(echo ${{ github.repository }} | cut -d/ -f2 | cut -d- -f3)-${nextRelease.version}.tar.gz"}]]}' > .releaserc.json
 
+      - name: Update galaxy.yml tags
+        run: |
+          yq --inplace ".tags=$(find roles/ -path *meta/main.yml -print0 | xargs -0 -L 1 yq '.galaxy_info.galaxy_tags' | yq --output-format json '. |= (sort | unique)')" galaxy.yml
+
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
