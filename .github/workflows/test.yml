@@ -108,9 +108,9 @@ jobs:
           GH_REPO: hadolint/hadolint
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download --pattern "*Linux-x86_64" --dir /tmp
-          chmod +x /tmp/hadolint-Linux-x86_64
-          mv /tmp/hadolint-Linux-x86_64 /usr/local/bin/hadolint
+          gh release download --pattern "*linux-x86_64" --dir /tmp
+          chmod +x /tmp/hadolint-linux-x86_64
+          mv /tmp/hadolint-linux-x86_64 /usr/local/bin/hadolint
 
       - name: Run hadolint
         if: steps.check_dockerfile.outputs.files_exists == 'true'
