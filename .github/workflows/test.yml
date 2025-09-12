@@ -347,7 +347,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install ansible
+      - name: Install Ansible
         if: steps.check_ansible_role.outputs.files_exists == 'true' || steps.check_ansible_playbook.outputs.files_exists == 'true'
         run: |
           pip3 install --disable-pip-version-check ansible

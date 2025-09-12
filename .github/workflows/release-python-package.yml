@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install poetry
+      - name: Install Poetry
         run: pip3 install --disable-pip-version-check poetry
 
       - name: Set up Node.js
@@ -31,12 +31,12 @@ jobs:
         run: |
           npm install --global semantic-release @semantic-release/exec conventional-changelog-conventionalcommits
 
-      # - name: Configure semantic-release
-      #   run: |
-      #     echo '{"preset":"conventionalcommits","plugins":[["@semantic-release/commit-analyzer"],["@semantic-release/release-notes-generator"],["@semantic-release/github"],["@semantic-release/exec",{"publishCmd":"ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_TOKEN }} $(echo ${{ github.repository }} | cut -d/ -f1) $(echo ${{ github.repository }} | cut -d/ -f2)"}]]}' > .releaserc.json
+      - name: Configure semantic-release
+        run: |
+          echo '{"preset":"conventionalcommits","plugins":[["@semantic-release/commit-analyzer"],["@semantic-release/release-notes-generator"],["@semantic-release/github"],["@semantic-release/exec",{"publishCmd":"poetry version ${nextRelease.version} && poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }} && poetry build && poetry publish"}]]}' > .releaserc.json
 
-      # - name: Run semantic-release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     semantic-release
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          semantic-release
