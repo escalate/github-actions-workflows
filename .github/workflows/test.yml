@@ -301,6 +301,16 @@ jobs:
         run: |
           black . --check --diff --color
 
+      - name: Install ruff
+        if: steps.check_python.outputs.files_exists == 'true'
+        run: |
+          pip3 install --disable-pip-version-check ruff
+
+      - name: Run ruff
+        if: steps.check_python.outputs.files_exists == 'true'
+        run: |
+          ruff check .
+
   ansible:
     name: Ansible
     runs-on: ubuntu-latest
