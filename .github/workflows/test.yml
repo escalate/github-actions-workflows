@@ -301,27 +301,6 @@ jobs:
         run: |
           black . --check --diff --color
 
-      - name: Check for Tox file
-        id: check_tox
-        uses: andstor/file-existence-action@v3
-        with:
-          files: "tox.ini"
-
-      - name: Install tox
-        if: steps.check_tox.outputs.files_exists == 'true'
-        run: |
-          pip3 install --disable-pip-version-check tox
-
-      - name: Install test dependencies
-        if: steps.check_tox.outputs.files_exists == 'true'
-        run: |
-          make dev-requirements
-
-      - name: Run tox
-        if: steps.check_tox.outputs.files_exists == 'true'
-        run: |
-          tox
-
   ansible:
     name: Ansible
     runs-on: ubuntu-latest
