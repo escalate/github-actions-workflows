@@ -25,7 +25,7 @@ jobs:
 
       - name: Install semantic-release
         run: |
-          npm install --global semantic-release conventional-changelog-conventionalcommits
+          npm install --global semantic-release@25 conventional-changelog-conventionalcommits@9
 
       - name: Configure semantic-release
         run: |
