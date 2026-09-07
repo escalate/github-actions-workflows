@@ -80,14 +80,14 @@ jobs:
           GH_REPO: editorconfig-checker/editorconfig-checker
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download --pattern "*linux-amd64.tar.gz" --dir /tmp
-          tar --extract --gzip --strip-components 1 --file /tmp/ec-linux-amd64.tar.gz --directory /tmp
-          chmod +x /tmp/ec-linux-amd64
-          mv /tmp/ec-linux-amd64 /usr/local/bin/ec
+          gh release download --pattern "editorconfig-checker-linux-amd64.tar.gz" --dir /tmp
+          tar --extract --gzip --strip-components 1 --file /tmp/editorconfig-checker-linux-amd64.tar.gz --directory /tmp
+          chmod +x /tmp/editorconfig-checker
+          mv /tmp/editorconfig-checker /usr/local/bin/editorconfig-checker
 
       - name: Run editorconfig-checker
         run: |
-          ec -verbose
+          editorconfig-checker -verbose
 
   dockerfile:
     name: Dockerfile
